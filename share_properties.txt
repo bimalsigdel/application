@@ -1,0 +1,12 @@
+  dynamic "share_properties" {
+    for_each = var.enabled_share_properties != [] ? var.enabled_share_properties : toset([])
+    content {
+      smb {
+        versions                        = share_properties.value["versions"]
+        authentication_types            = share_properties.value["authentication_types"]
+        kerberos_ticket_encryption_type = share_properties.value["kerberos_ticket_encryption_type"]
+        channel_encryption_type         = share_properties.value["channel_encryption_type"]
+        multichannel_enabled            = share_properties.value["multichannel_enabled"]
+      }
+    }
+  }
